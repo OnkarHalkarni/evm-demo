@@ -12,8 +12,8 @@ export default function ConfirmationModal({ candidateName, partyName, onClose }:
   useEffect(() => {
     const speakVoteConfirmation = () => {
       const utterance = new SpeechSynthesisUtterance(`आपण ${candidateName} या उमेदवाराला, ${partyName} पक्षाला मतदान केले आहे.`)
-      utterance.rate = 1
-      utterance.pitch = 1
+      utterance.rate = 0.8
+      utterance.pitch = 0.7
       utterance.volume = 1
       utterance.lang = 'hi-IN'
       window.speechSynthesis.speak(utterance)
