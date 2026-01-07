@@ -15,9 +15,10 @@ interface WardEVMProps {
     symbol: string
     active: boolean
   }>
+  onVote?: () => void
 }
 
-export default function WardEVM({ wardName, wardNumber, candidates }: WardEVMProps) {
+export default function WardEVM({ wardName, wardNumber, candidates, onVote }: WardEVMProps) {
   const [hasVoted, setHasVoted] = useState(false)
   const [showConfirmation, setShowConfirmation] = useState(false)
   const [votedCandidate, setVotedCandidate] = useState<{
@@ -31,6 +32,7 @@ export default function WardEVM({ wardName, wardNumber, candidates }: WardEVMPro
     setVotedCandidate({ name: candidate.name, party: candidate.party })
     setShowConfirmation(true)
     setHasVoted(true)
+    onVote?.()
   }
 
   const playBuzzerSound = () => {

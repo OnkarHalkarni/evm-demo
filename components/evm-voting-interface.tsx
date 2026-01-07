@@ -1,9 +1,12 @@
 "use client"
 
+import { useState } from "react"
 import EVMDisclaimer from "./evm-disclaimer"
 import WardEVM from "./ward-evm"
 
 export default function EVMVotingInterface() {
+  const [totalVotes, setTotalVotes] = useState(0)
+
   const wards = [
 
     {
@@ -32,7 +35,7 @@ export default function EVMVotingInterface() {
         { srNo: 1, name: "", party: "", photo: "", symbol: "", active: false },
         {
           srNo: 2,
-          name: "सौ.शिंदे आशा नितीन ",
+          name: "सौ.शिंदे आशा नितीन (काका) ",
           party: "राष्ट्रवादी",
           photo: "/Asha.JPG",
           symbol: "/ncp.jpg",
@@ -100,10 +103,16 @@ export default function EVMVotingInterface() {
         <p className="text-base sm:text-lg mt-2 opacity-90">४ विभाग • विविध उम्मेदवार</p>
       </div>
 
+      {/* Vote Counter */}
+      <div className="bg-blue-600 text-white p-4 rounded-lg shadow-lg text-center mb-6">
+        <h3 className="text-lg font-bold">एकूण मतदान संख्या</h3>
+        <p className="text-2xl font-mono">{totalVotes}</p>
+      </div>
+
       {/* Wards Container */}
       <div className="space-y-4 sm:space-y-8">
         {wards.map((ward, index) => (
-          <WardEVM key={index} wardName={ward.wardName} wardNumber={ward.wardNumber} candidates={ward.candidates} />
+          <WardEVM key={index} wardName={ward.wardName} wardNumber={ward.wardNumber} candidates={ward.candidates} onVote={() => setTotalVotes(prev => prev + 1)} />
         ))}
       </div>
 
