@@ -3,15 +3,14 @@
 import { useEffect } from "react"
 
 interface ConfirmationModalProps {
-  candidateName: string
-  partyName: string
+  votedCandidates: Array<{ name: string; party: string; ward: string }>
   onClose: () => void
 }
 
-export default function ConfirmationModal({ candidateName, partyName, onClose }: ConfirmationModalProps) {
+export default function ConfirmationModal({ votedCandidates, onClose }: ConfirmationModalProps) {
   useEffect(() => {
     const speakVoteConfirmation = () => {
-      const utterance = new SpeechSynthesisUtterance(`आपण ${candidateName} या उमेदवाराला, ${partyName} पक्षाला मतदान केले आहे.`)
+      const utterance = new SpeechSynthesisUtterance(`आपण सर्व मतदान यशस्वीपणे केले आहे.`)
       utterance.rate = 0.8
       utterance.pitch = 0.7
       utterance.volume = 1
@@ -20,10 +19,10 @@ export default function ConfirmationModal({ candidateName, partyName, onClose }:
     }
 
     speakVoteConfirmation()
-  }, [candidateName])
+  }, [])
 
   const handleWhatsAppShare = () => {
-    const message = `मी ${partyName} च्या ${candidateName} ला महानगर पालिका निवडणुकीत मत दिले! #VoteMatters`
+    const message = `मी सर्व उमेदवारांना मत दिले! #VoteMatters`
     const encodedMessage = encodeURIComponent(message)
     window.open(`https://wa.me/?text=${encodedMessage}`, "_blank")
   }
@@ -39,11 +38,16 @@ export default function ConfirmationModal({ candidateName, partyName, onClose }:
         {/* Modal Content */}
         <div className="p-4 sm:p-8 text-center">
           <div className="bg-blue-50 border-2 border-blue-600 rounded-sm p-4 sm:p-6 mb-4 sm:mb-6">
-            <p className="text-lg sm:text-xl font-bold text-blue-900">{candidateName}</p>
-            <p className="text-xs sm:text-sm text-gray-600 mt-2">{partyName}</p>
+            <h3 className="text-lg sm:text-xl font-bold text-blue-900 mb-4">आपण खालील उमेदवारांना मत दिले:</h3>
+            {votedCandidates.map((candidate, index) => (
+              <div key={index} className="mb-2">
+                <p className="font-semibold">{candidate.name}</p>
+                <p className="text-xs text-gray-600">{candidate.party} - {candidate.ward}</p>
+              </div>
+            ))}
           </div>
 
-          <p className="text-gray-600 text-xs sm:text-sm mb-6 sm:mb-8">तुमचे मत नोंदवले गेले आहे. सहभागासाठी धन्यवाद!</p>
+          <p className="text-gray-600 text-xs sm:text-sm mb-6 sm:mb-8">तुमचे सर्व मत नोंदवले गेले आहे. सहभागासाठी धन्यवाद!</p>
 
           {/* Buttons */}
           <div className="flex flex-col gap-2 sm:gap-3">

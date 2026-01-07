@@ -7,6 +7,7 @@ import ConfirmationModal from "./confirmation-modal"
 
 export default function EVMVotingInterface() {
   const [totalVotes, setTotalVotes] = useState(0)
+  const [votedCandidates, setVotedCandidates] = useState<Array<{ name: string; party: string; ward: string }>>([])
   const [showFinalConfirmation, setShowFinalConfirmation] = useState(false)
 
   useEffect(() => {
@@ -120,7 +121,10 @@ export default function EVMVotingInterface() {
       {/* Wards Container */}
       <div className="space-y-4 sm:space-y-8">
         {wards.map((ward, index) => (
-          <WardEVM key={index} wardName={ward.wardName} wardNumber={ward.wardNumber} candidates={ward.candidates} onVote={() => setTotalVotes(prev => prev + 1)} />
+          <WardEVM key={index} wardName={ward.wardName} wardNumber={ward.wardNumber} candidates={ward.candidates} onVote={(candidate) => {
+            setTotalVotes(prev => prev + 1)
+            setVotedCandidates(prev => [...prev, { name: candidate.name, party: candidate.party, ward: ward.wardName }])
+          }} />
         ))}
       </div>
 
@@ -149,8 +153,7 @@ export default function EVMVotingInterface() {
       {/* Final Confirmation Modal */}
       {showFinalConfirmation && (
         <ConfirmationModal
-          candidateName="सर्व उमेदवार"
-          partyName="सर्व पक्ष"
+          votedCandidates={votedCandidates}
           onClose={() => setShowFinalConfirmation(false)}
         />
       )}

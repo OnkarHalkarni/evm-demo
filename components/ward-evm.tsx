@@ -15,7 +15,7 @@ interface WardEVMProps {
     symbol: string
     active: boolean
   }>
-  onVote?: () => void
+  onVote?: (candidate: { srNo: number; name: string; party: string; photo: string; symbol: string; active: boolean }) => void
 }
 
 export default function WardEVM({ wardName, wardNumber, candidates, onVote }: WardEVMProps) {
@@ -25,7 +25,7 @@ export default function WardEVM({ wardName, wardNumber, candidates, onVote }: Wa
     playBuzzerSound()
     speakVote(candidate.name)
     setHasVoted(true)
-    onVote?.()
+    onVote?.(candidate)
   }
 
   const playBuzzerSound = () => {

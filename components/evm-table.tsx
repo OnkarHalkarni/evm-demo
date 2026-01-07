@@ -89,6 +89,8 @@ export default function EVMTable({ candidates, hasVoted, onVote }: EVMTableProps
                     ${
                       candidate.active && !hasVoted
                         ? "bg-blue-600 text-white hover:bg-blue-700 hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl cursor-pointer"
+                        : candidate.active && hasVoted
+                        ? "bg-green-600 text-white shadow-lg cursor-not-allowed"
                         : "bg-gray-400 text-gray-200 cursor-not-allowed opacity-50"
                     }
                   `}
