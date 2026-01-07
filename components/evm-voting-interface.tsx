@@ -1,11 +1,19 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import EVMDisclaimer from "./evm-disclaimer"
 import WardEVM from "./ward-evm"
+import ConfirmationModal from "./confirmation-modal"
 
 export default function EVMVotingInterface() {
   const [totalVotes, setTotalVotes] = useState(0)
+  const [showFinalConfirmation, setShowFinalConfirmation] = useState(false)
+
+  useEffect(() => {
+    if (totalVotes === 4) {
+      setShowFinalConfirmation(true)
+    }
+  }, [totalVotes])
 
   const wards = [
 
@@ -137,6 +145,15 @@ export default function EVMVotingInterface() {
           WhatsApp: +91 96571 14882
         </a>
       </div>
+
+      {/* Final Confirmation Modal */}
+      {showFinalConfirmation && (
+        <ConfirmationModal
+          candidateName="सर्व उमेदवार"
+          partyName="सर्व पक्ष"
+          onClose={() => setShowFinalConfirmation(false)}
+        />
+      )}
     </div>
   )
 }

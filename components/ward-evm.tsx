@@ -20,17 +20,10 @@ interface WardEVMProps {
 
 export default function WardEVM({ wardName, wardNumber, candidates, onVote }: WardEVMProps) {
   const [hasVoted, setHasVoted] = useState(false)
-  const [showConfirmation, setShowConfirmation] = useState(false)
-  const [votedCandidate, setVotedCandidate] = useState<{
-    name: string
-    party: string
-  } | null>(null)
 
   const handleVote = (candidate: (typeof candidates)[0]) => {
     playBuzzerSound()
     speakVote(candidate.name)
-    setVotedCandidate({ name: candidate.name, party: candidate.party })
-    setShowConfirmation(true)
     setHasVoted(true)
     onVote?.()
   }
@@ -77,15 +70,6 @@ export default function WardEVM({ wardName, wardNumber, candidates, onVote }: Wa
           <EVMTable candidates={candidates} hasVoted={hasVoted} onVote={handleVote} />
         </div>
       </div>
-
-      {/* Ward-specific Confirmation Modal */}
-      {showConfirmation && votedCandidate && (
-        <ConfirmationModal
-          candidateName={votedCandidate.name}
-          partyName={votedCandidate.party}
-          onClose={() => setShowConfirmation(false)}
-        />
-      )}
     </div>
   )
 }
