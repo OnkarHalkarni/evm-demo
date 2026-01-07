@@ -11,7 +11,7 @@ interface ConfirmationModalProps {
 export default function ConfirmationModal({ candidateName, partyName, onClose }: ConfirmationModalProps) {
   useEffect(() => {
     const speakVoteConfirmation = () => {
-      const utterance = new SpeechSynthesisUtterance(`आपण ${candidateName} ला यशस्वीपणे मत दिले आहे`)
+      const utterance = new SpeechSynthesisUtterance(`आपण ${candidateName} या उमेदवाराला, ${partyName} पक्षाला मतदान केले आहे.`)
       utterance.rate = 1
       utterance.pitch = 1
       utterance.volume = 1
