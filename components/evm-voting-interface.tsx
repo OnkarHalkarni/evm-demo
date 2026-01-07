@@ -72,7 +72,7 @@ export default function EVMVotingInterface() {
           srNo: 2,
           name: "श्री.मनोज उर्फ अभिजीत हणमंतराव फार्णे",
           party: "राष्ट्रवादी",
-          photo: "/manoj.jpg",
+          photo: "/Manoj.jpg",
           symbol: "/ncp.jpg",
           active: true,
         },
