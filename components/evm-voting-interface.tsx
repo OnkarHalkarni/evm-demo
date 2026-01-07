@@ -6,8 +6,20 @@ import WardEVM from "./ward-evm"
 import ConfirmationModal from "./confirmation-modal"
 
 export default function EVMVotingInterface() {
-  const [totalVotes, setTotalVotes] = useState(0)
-  const [votedCandidates, setVotedCandidates] = useState<Array<{ name: string; party: string; ward: string }>>([])
+  const [totalVotes, setTotalVotes] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('totalVotes')
+      return saved ? parseInt(saved, 10) : 0
+    }
+    return 0
+  })
+  const [votedCandidates, setVotedCandidates] = useState<Array<{ name: string; party: string; ward: string }>>(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('votedCandidates')
+      return saved ? JSON.parse(saved) : []
+    }
+    return []
+  })
   const [showFinalConfirmation, setShowFinalConfirmation] = useState(false)
 
   useEffect(() => {
@@ -15,6 +27,14 @@ export default function EVMVotingInterface() {
       setShowFinalConfirmation(true)
     }
   }, [totalVotes])
+
+  useEffect(() => {
+    localStorage.setItem('totalVotes', totalVotes.toString())
+  }, [totalVotes])
+
+  useEffect(() => {
+    localStorage.setItem('votedCandidates', JSON.stringify(votedCandidates))
+  }, [votedCandidates])
 
   const wards = [
 
