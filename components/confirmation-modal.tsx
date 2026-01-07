@@ -11,7 +11,7 @@ interface ConfirmationModalProps {
 export default function ConfirmationModal({ candidateName, partyName, onClose }: ConfirmationModalProps) {
   useEffect(() => {
     const speakVoteConfirmation = () => {
-      const utterance = new SpeechSynthesisUtterance(`तुम्ही ${candidateName} ला मत दिले आहे`)
+      const utterance = new SpeechSynthesisUtterance(`आपण ${candidateName} ला यशस्वीपणे मत दिले आहे`)
       utterance.rate = 1
       utterance.pitch = 1
       utterance.volume = 1
@@ -30,7 +30,7 @@ export default function ConfirmationModal({ candidateName, partyName, onClose }:
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-2 sm:p-4 z-50">
-      <div className="bg-white rounded-lg border-4 border-blue-900 shadow-2xl max-w-sm sm:max-w-md w-full transform transition-all duration-300 scale-100 hover:scale-105">
+      <div className="bg-white rounded-lg border-4 border-blue-900 shadow-2xl max-w-sm sm:max-w-md w-full max-h-[80vh] overflow-y-auto transform transition-all duration-300 scale-100 hover:scale-105">
         {/* Modal Header */}
         <div className="bg-gradient-to-r from-green-600 via-emerald-600 to-green-700 text-white p-4 sm:p-6 text-center border-b-4 border-blue-900 rounded-t-lg">
           <h2 className="text-lg sm:text-2xl font-bold">✓ मत निश्चित</h2>
