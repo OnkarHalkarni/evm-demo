@@ -93,7 +93,7 @@ export default function EVMTable({ candidates, hasVoted, onVote }: EVMTableProps
                     }
                   `}
                 >
-                  मतदान
+                  बटण दाबा
                 </button>
               </td>
             </tr>

@@ -3,6 +3,7 @@
 import { useState } from "react"
 import EVMTable from "./evm-table"
 import ConfirmationModal from "./confirmation-modal"
+import GreenLightSignal from "./green-light-signal"
 
 interface WardEVMProps {
   wardName: string
@@ -73,6 +74,11 @@ export default function WardEVM({ wardName, wardNumber, candidates }: WardEVMPro
         {/* Candidate Table */}
         <div className="p-3 sm:p-6">
           <EVMTable candidates={candidates} hasVoted={hasVoted} onVote={handleVote} />
+        </div>
+
+        {/* Green Light Signal */}
+        <div className="p-3 sm:p-6 border-t-3 border-blue-700">
+          <GreenLightSignal isActive={hasVoted} />
         </div>
       </div>
 
