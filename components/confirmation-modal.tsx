@@ -9,16 +9,9 @@ interface ConfirmationModalProps {
 
 export default function ConfirmationModal({ votedCandidates, onClose }: ConfirmationModalProps) {
   useEffect(() => {
-    const speakVoteConfirmation = () => {
-      const utterance = new SpeechSynthesisUtterance(`आपण सर्व मतदान यशस्वीपणे केले आहे.`)
-      utterance.rate = 0.8
-      utterance.pitch = 0.7
-      utterance.volume = 1
-      utterance.lang = 'hi-IN'
-      window.speechSynthesis.speak(utterance)
-    }
-
-    speakVoteConfirmation()
+    const audio = new Audio('/votingaudio.mpeg')
+    audio.volume = 1
+    audio.play().catch(console.error)
   }, [])
 
   const handleWhatsAppShare = () => {

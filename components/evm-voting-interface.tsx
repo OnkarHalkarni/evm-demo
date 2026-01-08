@@ -6,21 +6,22 @@ import WardEVM from "./ward-evm"
 import ConfirmationModal from "./confirmation-modal"
 
 export default function EVMVotingInterface() {
-  const [totalVotes, setTotalVotes] = useState(() => {
-    if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('totalVotes')
-      return saved ? parseInt(saved, 10) : 0
-    }
-    return 0
-  })
-  const [votedCandidates, setVotedCandidates] = useState<Array<{ name: string; party: string; ward: string }>>(() => {
-    if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('votedCandidates')
-      return saved ? JSON.parse(saved) : []
-    }
-    return []
-  })
+  const [mounted, setMounted] = useState(false)
+  const [totalVotes, setTotalVotes] = useState(0)
+  const [votedCandidates, setVotedCandidates] = useState<Array<{ name: string; party: string; ward: string }>>([])
   const [showFinalConfirmation, setShowFinalConfirmation] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+    const savedVotes = localStorage.getItem('totalVotes')
+    if (savedVotes) {
+      setTotalVotes(parseInt(savedVotes, 10))
+    }
+    const savedCandidates = localStorage.getItem('votedCandidates')
+    if (savedCandidates) {
+      setVotedCandidates(JSON.parse(savedCandidates))
+    }
+  }, [])
 
   useEffect(() => {
     if (totalVotes === 4) {
@@ -133,10 +134,12 @@ export default function EVMVotingInterface() {
       </div>
 
       {/* Vote Counter */}
-      <div className="bg-blue-600 text-white p-4 rounded-lg shadow-lg text-center mb-6">
-        <h3 className="text-lg font-bold">एकूण मतदान संख्या</h3>
-        <p className="text-2xl font-mono">{totalVotes}</p>
-      </div>
+      {mounted && (
+        <div className="bg-blue-600 text-white p-4 rounded-lg shadow-lg text-center mb-6">
+          <h3 className="text-lg font-bold">एकूण मतदान संख्या</h3>
+          <p className="text-2xl font-mono">{totalVotes}</p>
+        </div>
+      )}
 
       {/* Wards Container */}
       <div className="space-y-4 sm:space-y-8">

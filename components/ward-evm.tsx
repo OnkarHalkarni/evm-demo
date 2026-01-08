@@ -47,12 +47,9 @@ export default function WardEVM({ wardName, wardNumber, candidates, onVote }: Wa
   }
 
   const speakVote = (candidateName: string) => {
-    const utterance = new SpeechSynthesisUtterance(`आपण ${candidateName} यांना मत दिले`)
-    utterance.rate = 1
-    utterance.pitch = 1
-    utterance.volume = 1
-    utterance.lang = 'hi-IN'
-    window.speechSynthesis.speak(utterance)
+    const audio = new Audio('/votingaudio.mpeg')
+    audio.volume = 1
+    audio.play().catch(console.error)
   }
 
   return (
