@@ -13,9 +13,10 @@ interface WardEVMProps {
     party: string
     photo: string
     symbol: string
+    voice: string
     active: boolean
   }>
-  onVote?: (candidate: { srNo: number; name: string; party: string; photo: string; symbol: string; active: boolean }) => void
+  onVote?: (candidate: { srNo: number; name: string; party: string; photo: string; symbol: string; voice: string; active: boolean }) => void
 }
 
 export default function WardEVM({ wardName, wardNumber, candidates, onVote }: WardEVMProps) {
@@ -23,7 +24,7 @@ export default function WardEVM({ wardName, wardNumber, candidates, onVote }: Wa
 
   const handleVote = (candidate: (typeof candidates)[0]) => {
     playBuzzerSound()
-    speakVote(candidate.name)
+    speakVote(candidate)
     setHasVoted(true)
     onVote?.(candidate)
   }
@@ -46,8 +47,8 @@ export default function WardEVM({ wardName, wardNumber, candidates, onVote }: Wa
     oscillator.stop(audioContext.currentTime + 0.2)
   }
 
-  const speakVote = (candidateName: string) => {
-    const audio = new Audio('/votingaudio.mpeg')
+  const speakVote = (candidate: (typeof candidates)[0]) => {
+    const audio = new Audio(candidate.voice || '/votingaudio.mpeg')
     audio.volume = 1
     audio.play().catch(console.error)
   }

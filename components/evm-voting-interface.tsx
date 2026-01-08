@@ -9,7 +9,6 @@ export default function EVMVotingInterface() {
   const [mounted, setMounted] = useState(false)
   const [totalVotes, setTotalVotes] = useState(0)
   const [votedCandidates, setVotedCandidates] = useState<Array<{ name: string; party: string; ward: string }>>([])
-  const [showFinalConfirmation, setShowFinalConfirmation] = useState(false)
 
   useEffect(() => {
     setMounted(true)
@@ -23,11 +22,7 @@ export default function EVMVotingInterface() {
     }
   }, [])
 
-  useEffect(() => {
-    if (totalVotes === 4) {
-      setShowFinalConfirmation(true)
-    }
-  }, [totalVotes])
+  // Removed final confirmation after 4 votes
 
   useEffect(() => {
     localStorage.setItem('totalVotes', totalVotes.toString())
@@ -43,76 +38,80 @@ export default function EVMVotingInterface() {
       wardName: "प्रभाग क्रमांक 12 गट अ",
       wardNumber: "12-A",
       candidates: [
-        { srNo: 1, name: "", party: "", photo: "", symbol: "", active: false },
-        { srNo: 2, name: "", party: "", photo: "", symbol: "", active: false },
+        { srNo: 1, name: "", party: "", photo: "", symbol: "", voice: "", active: false },
+        { srNo: 2, name: "", party: "", photo: "", symbol: "", voice: "", active: false },
         {
           srNo: 3,
           name: "सौ. सुरेखा परमेश्वर म्हारगुडे (थोरात)",
           party: " काँग्रेस ",
           photo: "/surekha.jpg",
           symbol: "/congress.png",
+          voice: "/surekha.mp3",
           active: true,
         },
-        { srNo: 4, name: "", party: "", photo: "", symbol: "", active: false },
-        { srNo: 5, name: "", party: "", photo: "", symbol: "", active: false },
-        { srNo: 6, name: "", party: "", photo: "", symbol: "", active: false },
+        { srNo: 4, name: "", party: "", photo: "", symbol: "", voice: "", active: false },
+        { srNo: 5, name: "", party: "", photo: "", symbol: "", voice: "", active: false },
+        { srNo: 6, name: "", party: "", photo: "", symbol: "", voice: "", active: false },
       ],
     },
     {
       wardName: "प्रभाग क्रमांक 12 गट ब",
       wardNumber: "12-B",
       candidates: [
-        { srNo: 1, name: "", party: "", photo: "", symbol: "", active: false },
+        { srNo: 1, name: "", party: "", photo: "", symbol: "", voice: "", active: false },
         {
           srNo: 2,
           name: "सौ.शिंदे आशा नितीन (काका) ",
           party: "राष्ट्रवादी",
           photo: "/Asha.JPG",
           symbol: "/ncp.jpg",
+          voice: "/Asha.mp3",
           active: true,
         },
-        { srNo: 3, name: "", party: "", photo: "", symbol: "", active: false },
-        { srNo: 4, name: "", party: "", photo: "", symbol: "", active: false },
-        { srNo: 5, name: "", party: "", photo: "", symbol: "", active: false },
-        { srNo: 6, name: "", party: "", photo: "", symbol: "", active: false },
+        { srNo: 3, name: "", party: "", photo: "", symbol: "", voice: "", active: false },
+        { srNo: 4, name: "", party: "", photo: "", symbol: "", voice: "", active: false },
+        { srNo: 5, name: "", party: "", photo: "", symbol: "", voice: "", active: false },
+        { srNo: 6, name: "", party: "", photo: "", symbol: "", voice: "", active: false },
       ],
     },
     {
       wardName: "प्रभाग क्रमांक 12 गट क",
       wardNumber: "12-C",
       candidates: [
-        { srNo: 1, name: "", party: "", photo: "", symbol: "", active: false },
-        { srNo: 2, name: "", party: "", photo: "", symbol: "", active: false },
+        { srNo: 1, name: "", party: "", photo: "", symbol: "", voice: "", active: false },
+        { srNo: 2, name: "", party: "", photo: "", symbol: "", voice: "", active: false },
         {
           srNo: 3,
           name: "श्री.प्रमोद (भैय्या) प्र. सूर्यवंशी",
           party: "काँग्रेस",
           photo: "/promod.jpg",
           symbol: "/congress.png",
+          voice: "/promod .mp3",
           active: true,
         },
-        { srNo: 4, name: "", party: "", photo: "", symbol: "", active: false },
-        { srNo: 5, name: "", party: "", photo: "", symbol: "", active: false },
-        { srNo: 6, name: "", party: "", photo: "", symbol: "", active: false },
+        { srNo: 4, name: "", party: "", photo: "", symbol: "", voice: "", active: false },
+        { srNo: 5, name: "", party: "", photo: "", symbol: "", voice: "", active: false },
+        { srNo: 6, name: "", party: "", photo: "", symbol: "", voice: "", active: false },
       ],
     },
     {
       wardName: "प्रभाग क्रमांक 12 गट ड",
       wardNumber: "12-D",
       candidates: [
-        { srNo: 1, name: "", party: "", photo: "", symbol: "", active: false },
+        { srNo: 1, name: "", party: "", photo: "", symbol: "", voice: "", active: false },
         {
           srNo: 2,
           name: "श्री.मनोज उर्फ अभिजीत हणमंतराव फार्णे",
           party: "राष्ट्रवादी",
           photo: "/Manoj.jpg",
           symbol: "/ncp.jpg",
+          voice: "/manoj.mp3",
           active: true,
         },
-        { srNo: 3, name: "", party: "", photo: "", symbol: "", active: false },
-        { srNo: 4, name: "", party: "", photo: "", symbol: "", active: false },
-        { srNo: 5, name: "", party: "", photo: "", symbol: "", active: false },
-        { srNo: 6, name: "", party: "", photo: "", symbol: "", active: false },
+        { srNo: 3, name: "", party: "", photo: "", symbol: "", voice: "", active: false },
+        { srNo: 4, name: "", party: "", photo: "", symbol: "", voice: "", active: false },
+        { srNo: 5, name: "", party: "", photo: "", symbol: "", voice: "", active: false },
+        { srNo: 6, name: "", party: "", photo: "", symbol: "", voice: "", active: false },
       ],
     },
   ]
@@ -173,13 +172,6 @@ export default function EVMVotingInterface() {
         </a>
       </div>
 
-      {/* Final Confirmation Modal */}
-      {showFinalConfirmation && (
-        <ConfirmationModal
-          votedCandidates={votedCandidates}
-          onClose={() => setShowFinalConfirmation(false)}
-        />
-      )}
     </div>
   )
 }

@@ -6,6 +6,7 @@ interface Candidate {
   party: string
   photo: string
   symbol: string
+  voice: string
   active: boolean
 }
 
