@@ -11,12 +11,18 @@ interface Candidate {
 }
 
 interface EVMTableProps {
-  candidates: Candidate[]
-  hasVoted: boolean
-  onVote: (candidate: Candidate) => void
-}
+   candidates: Candidate[]
+   hasVoted: boolean
+   onVote: (candidate: Candidate) => void
+   wardNumber: string
+ }
 
-export default function EVMTable({ candidates, hasVoted, onVote }: EVMTableProps) {
+export default function EVMTable({ candidates, hasVoted, onVote, wardNumber }: EVMTableProps) {
+  const bgColor = wardNumber.endsWith('-A') ? 'bg-white' :
+                  wardNumber.endsWith('-B') ? 'bg-pink-100' :
+                  wardNumber.endsWith('-C') ? 'bg-yellow-100' :
+                  wardNumber.endsWith('-D') ? 'bg-blue-100' : 'bg-white'
+
   return (
     <div className="overflow-x-auto w-full">
       <table className="w-full border-collapse">
@@ -32,9 +38,7 @@ export default function EVMTable({ candidates, hasVoted, onVote }: EVMTableProps
           {candidates.map((candidate, index) => (
             <tr
               key={index}
-              className={`${
-                candidate.active ? "bg-blue-50 hover:bg-blue-100" : "bg-gray-100"
-              } border-2 border-gray-800 transition-all duration-200 hover:shadow-md`}
+              className={`${bgColor} border-2 border-gray-800 transition-all duration-200 hover:shadow-md`}
             >
               {/* Sr. No Column */}
               <td className="border-r-2 border-gray-800 px-2 sm:px-4 py-2 sm:py-4 text-center font-semibold text-gray-800 text-sm sm:text-base">
