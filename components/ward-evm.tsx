@@ -22,6 +22,16 @@ interface WardEVMProps {
 export default function WardEVM({ wardName, wardNumber, candidates, onVote }: WardEVMProps) {
   const [hasVoted, setHasVoted] = useState(false)
 
+  const bgColor = wardNumber.endsWith('-A') ? 'bg-white' :
+                  wardNumber.endsWith('-B') ? 'bg-pink-100' :
+                  wardNumber.endsWith('-C') ? 'bg-yellow-100' :
+                  wardNumber.endsWith('-D') ? 'bg-blue-100' : 'bg-white'
+
+  const headerBgColor = wardNumber.endsWith('-A') ? 'bg-white text-black' :
+                        wardNumber.endsWith('-B') ? 'bg-pink-100 text-black' :
+                        wardNumber.endsWith('-C') ? 'bg-yellow-100 text-black' :
+                        wardNumber.endsWith('-D') ? 'bg-blue-100 text-black' : 'bg-white text-black'
+
   const handleVote = (candidate: (typeof candidates)[0]) => {
     playBuzzerSound()
     speakVote(candidate)
@@ -56,11 +66,11 @@ export default function WardEVM({ wardName, wardNumber, candidates, onVote }: Wa
   return (
     <div className="w-full mb-4 sm:mb-8">
       {/* Ward Container */}
-      <div className="bg-white rounded-lg border-4 border-blue-600 shadow-2xl hover:shadow-3xl transition-shadow duration-300">
+      <div className={`${bgColor} rounded-lg border-4 border-blue-600 shadow-2xl hover:shadow-3xl transition-shadow duration-300`}>
         {/* Ward Header */}
-        <div className="bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 text-white p-3 sm:p-4 text-center border-b-3 border-blue-700 rounded-t-lg">
-          <h2 className="text-lg sm:text-2xl font-bold">{wardName}</h2>
-          <p className="text-xs sm:text-sm opacity-90">प्रभाग क्र. {wardNumber}</p>
+        <div className={`${headerBgColor} text-white p-3 sm:p-4 text-center border-b-3 border-blue-700 rounded-t-lg`}>
+          <h2 className="text-lg sm:text-2xl font-bold text-black">{wardName}</h2>
+          <p className="text-xs sm:text-sm opacity-90 text-black">प्रभाग क्र. {wardNumber}</p>
         </div>
 
         {/* Candidate Table */}

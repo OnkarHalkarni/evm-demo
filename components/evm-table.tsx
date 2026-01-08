@@ -42,9 +42,9 @@ export default function EVMTable({ candidates, hasVoted, onVote }: EVMTableProps
               </td>
 
               {/* Candidate Details Column */}
-              <td className="border-r-2 border-gray-800 px-2 sm:px-4 py-2 sm:py-4">
+              <td className="border-r-2 border-gray-800 px-2 sm:px-4 py-2 sm:py-4 overflow-hidden">
                 {candidate.active ? (
-                  <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-2 sm:gap-4">
                     {/* Photo */}
                     <div className="flex-shrink-0">
                       <img
@@ -56,8 +56,8 @@ export default function EVMTable({ candidates, hasVoted, onVote }: EVMTableProps
 
                     {/* Name and Party */}
                     <div className="flex-1 min-w-0">
-                      <p className="font-bold text-gray-800 text-xs sm:text-sm truncate">{candidate.name}</p>
-                      <p className="text-xs text-gray-600 mt-1 truncate">{candidate.party}</p>
+                      <p className="font-bold text-gray-800 text-xs sm:text-sm">{candidate.name}</p>
+                      <p className="text-xs text-gray-600 mt-1 sm:truncate hidden sm:block">{candidate.party}</p>
                     </div>
                   </div>
                 ) : (
