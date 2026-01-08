@@ -65,7 +65,7 @@ export default function EVMVotingInterface() {
           party: "राष्ट्रवादी",
           photo: "/Asha.JPG",
           symbol: "/ncp.jpg",
-          voice: "/Asha.mp3",
+          voice: "/Asha2.mp3",
           active: true,
         },
         { srNo: 3, name: "", party: "", photo: "", symbol: "", voice: "", active: false },
